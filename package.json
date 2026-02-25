@@ -1,6 +1,6 @@
 {
   "name": "fastroute-domain",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "FastRoute shared domain rules (single source of truth) for mobile + backend.",
   "license": "MIT",
   "author": "FastRoute",
@@ -39,7 +39,7 @@
     "typescript": "^5.7.2",
     "vitest": "^2.1.8"
   },
-    "publishConfig": {
-      "access": "public"
+  "publishConfig": {
+    "access": "public"
   }
 }
