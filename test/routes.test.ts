@@ -1,4 +1,3 @@
-import { normalizeJwtProviderResult, validateJwtInput } from "../src/auth";
 import { describe, it, expect } from "vitest";
 import { canFinishRoute } from "../src/routes";
 

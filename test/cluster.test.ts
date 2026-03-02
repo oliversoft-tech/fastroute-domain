@@ -1,4 +1,3 @@
-import { normalizeJwtProviderResult, validateJwtInput } from "../src/auth";
 import { describe, it, expect } from "vitest";
 import { dbscanDefaults, validateDbscanPoints, groupByClusterId } from "../src/cluster";
 
@@ -30,7 +29,7 @@ describe("cluster", () => {
       { cluster_id: 1, x: "b" },
       { cluster_id: 2, x: "c" }
     ]);
-    expect(grouped[1].length).toBe(2);
-    expect(grouped[2].length).toBe(1);
+    expect(grouped[1]?.length).toBe(2);
+    expect(grouped[2]?.length).toBe(1);
   });
 });

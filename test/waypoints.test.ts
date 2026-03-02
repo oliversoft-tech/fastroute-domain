@@ -1,4 +1,3 @@
-import { normalizeJwtProviderResult, validateJwtInput } from "../src/auth";
 import { describe, it, expect } from "vitest";
 import { generateWaypointsForCluster, validateWaypointPhotoMeta } from "../src/waypoints";
 
@@ -13,8 +12,8 @@ describe("waypoints", () => {
     expect(r.ok).toBe(true);
     if (r.ok) {
       expect(r.value.length).toBe(3);
-      expect(r.value[0].seq_order).toBe(1);
-      expect(r.value[2].seq_order).toBe(3);
+      expect(r.value[0]?.seq_order).toBe(1);
+      expect(r.value[2]?.seq_order).toBe(3);
       expect(r.value.every((w) => w.status === "PENDENTE")).toBe(true);
     }
   });
