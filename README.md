@@ -8,6 +8,7 @@ Single source of truth for FastRoute business rules, shared across:
 This repository implements the rules extracted from your n8n flows:
 - Validate JWT (structural + result normalization)
 - Add Route (DBSCAN preconditions + clustering params defaults + waypoint generation)
+  - Includes meter-based clustering helper: `clusterizeAddressPointsByMeters`
 - Finish Route (route status + no pending waypoints)
 - Finish Waypoint (allowed transitions + mandatory photo metadata + upload/record preconditions)
 
@@ -23,7 +24,9 @@ npm i fastroute-domain
 import {
   validateJwtInput,
   dbscanDefaults,
+  dbscanMetersDefaults,
   validateDbscanPoints,
+  clusterizeAddressPointsByMeters,
   generateWaypointsForCluster,
   canFinishRoute,
   validateFinishWaypoint

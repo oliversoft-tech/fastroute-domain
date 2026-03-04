@@ -43,6 +43,15 @@ export interface DbscanParams {
   minPts: number;
 }
 
+export interface DbscanMetersParams {
+  epsMeters: number;
+  minPts: number;
+}
+
+export interface ClusterizedAddressPoint extends AddressPoint {
+  cluster_id: number;
+}
+
 export interface ValidationOk<T> {
   ok: true;
   value: T;

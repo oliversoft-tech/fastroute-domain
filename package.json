@@ -1,6 +1,6 @@
 {
   "name": "@oliverbill/fastroute-domain",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "FastRoute shared domain rules (single source of truth) for mobile + backend.",
   "license": "MIT",
   "author": "FastRoute",
