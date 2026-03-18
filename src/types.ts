@@ -2,20 +2,13 @@
  * Domain types aligned with your n8n flows.
  */
 
-export type ISODateTime = string;
+import type { DbRouteStatus, ISODateTime, WaypointStatus } from "./models";
 
-export type RouteStatus = "PLANEJADA" | "EM_ANDAMENTO" | "CONCLUÍDA";
-
-export type WaypointStatus =
-  | "PENDENTE"
-  | "REORDENADO"
-  | "ENTREGUE"
-  | "FALHA MORADOR AUSENTE"
-  | "FALHA TEMPO ADVERSO";
+export type { ISODateTime, WaypointStatus };
 
 export interface Route {
   id: number;
-  status: RouteStatus;
+  status: DbRouteStatus;
   ativa?: boolean;
   versao?: number;
   iniciada_em?: ISODateTime | null;

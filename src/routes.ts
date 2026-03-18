@@ -1,7 +1,8 @@
-import type { FinishRouteInput, RouteStatus, ValidationResult } from "./types";
+import type { DbRouteStatus } from "./models";
+import type { FinishRouteInput, ValidationResult } from "./types";
 import { err, ok } from "./errors";
 
-export const ROUTE_FINISH_REQUIRED_STATUS: RouteStatus = "EM_ANDAMENTO";
+export const ROUTE_FINISH_REQUIRED_STATUS: DbRouteStatus = "EM_ANDAMENTO";
 
 /**
  * Mirrors Finish Route flow rules:

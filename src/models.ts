@@ -1,16 +1,29 @@
 /**
- * DB-aligned models — one interface per table in the FastRoute schema.
+ * DB-aligned models — one interface per table in src/supabase-schema.sql.
+ * This file is self-contained; types.ts imports from here, not the other way.
  */
 
-import type { ISODateTime, WaypointStatus } from "./types";
+// ─── Primitives ───────────────────────────────────────────────────────────────
 
-// ─── Enum types ───────────────────────────────────────────────────────────────
+export type ISODateTime = string;
 
+// ─── Enum types (mirror PostgreSQL ENUMs) ─────────────────────────────────────
+
+/** mirrors: CREATE TYPE import_status */
 export type ImportStatus = "SEM_ROTA" | "ROTERIZADA" | "NAO_ENTREGUE";
 
+/** mirrors: CREATE TYPE route_status */
 export type DbRouteStatus = "CRIADA" | "CANCELADA" | "EM_ANDAMENTO" | "CONCLUÍDA";
 
-// ─── Table models ─────────────────────────────────────────────────────────────
+/** mirrors: CREATE TYPE waypoint_status */
+export type WaypointStatus =
+  | "PENDENTE"
+  | "ENTREGUE"
+  | "FALHA TEMPO ADVERSO"
+  | "FALHA MORADOR AUSENTE"
+  | "REORDENADO";
+
+// ─── Table: clients ───────────────────────────────────────────────────────────
 
 export interface Client {
   id: number;
@@ -21,11 +34,15 @@ export interface Client {
   numero_whatsup: string;
 }
 
+// ─── Table: importfile_layout ─────────────────────────────────────────────────
+
 export interface ImportfileLayout {
   id: number;
   created_at: ISODateTime;
   column_names?: string | null;
 }
+
+// ─── Table: users ─────────────────────────────────────────────────────────────
 
 export interface User {
   id: number;
@@ -38,12 +55,16 @@ export interface User {
   role: string;
 }
 
+// ─── Table: address_errors ────────────────────────────────────────────────────
+
 export interface AddressError {
   id: string;
   raw_data?: Record<string, unknown> | null;
   error_message?: string | null;
-  created_at: ISODateTime;
+  created_at?: ISODateTime | null;
 }
+
+// ─── Table: orders_import ─────────────────────────────────────────────────────
 
 export interface OrdersImport {
   id: number;
@@ -52,6 +73,8 @@ export interface OrdersImport {
   status: ImportStatus;
   layout_id: number;
 }
+
+// ─── Table: orders ────────────────────────────────────────────────────────────
 
 export interface Order {
   id: number;
@@ -72,6 +95,8 @@ export interface Order {
   import_id: number;
 }
 
+// ─── Table: addresses ─────────────────────────────────────────────────────────
+
 export interface Address {
   id: number;
   created_at: ISODateTime;
@@ -83,7 +108,8 @@ export interface Address {
   order_id: number;
 }
 
-/** Full DB model for the `routes` table. */
+// ─── Table: routes ────────────────────────────────────────────────────────────
+
 export interface DbRoute {
   id: number;
   created_at: ISODateTime;
@@ -99,7 +125,8 @@ export interface DbRoute {
   justificativa_cancel?: string | null;
 }
 
-/** Full DB model for the `route_waypoints` table. */
+// ─── Table: route_waypoints ───────────────────────────────────────────────────
+
 export interface RouteWaypoint {
   id: number;
   created_at: ISODateTime;
@@ -112,6 +139,8 @@ export interface RouteWaypoint {
   version?: number | null;
 }
 
+// ─── Table: change_log ────────────────────────────────────────────────────────
+
 export interface ChangeLog {
   id: number;
   created_at?: ISODateTime | null;
@@ -122,11 +151,15 @@ export interface ChangeLog {
   payload?: Record<string, unknown> | null;
 }
 
+// ─── Table: mutations_applied ─────────────────────────────────────────────────
+
 export interface MutationApplied {
   device_id: string;
   mutation_id: string;
   created_at?: ISODateTime | null;
 }
+
+// ─── Table: waypoint_delivery_photo ───────────────────────────────────────────
 
 export interface WaypointDeliveryPhoto {
   id: number;
